@@ -1,0 +1,118 @@
+2026-05-11 23:45:21 [INFO] Log guardado en: D:\Escritorio\TIDATOS\documentacion\etl_log_20260511_234521.txt
+2026-05-11 23:45:21 [INFO] ======================================================================
+2026-05-11 23:45:21 [INFO]   ETL BRONZE → SILVER | Data Lake Airbnb Chile
+2026-05-11 23:45:21 [INFO] ======================================================================
+2026-05-11 23:45:21 [INFO]   Fecha de ejecución: 2026-05-11 23:45:21
+2026-05-11 23:45:21 [INFO]   Bronze: D:\Escritorio\TIDATOS\capa_bronce\chile
+2026-05-11 23:45:21 [INFO]   Silver: D:\Escritorio\TIDATOS\capa_silver\airbnb_silver.db
+2026-05-11 23:45:21 [INFO] ======================================================================
+2026-05-11 23:45:21 [INFO] 
+======================================================================
+2026-05-11 23:45:21 [INFO]   FASE 1: EXTRACCIÓN (Bronze → DataFrames)
+2026-05-11 23:45:21 [INFO] ======================================================================
+2026-05-11 23:45:21 [INFO] Ciudades detectadas en Bronze: ['la_serena', 'pucon', 'santiago', 'vina_del_mar']
+2026-05-11 23:45:21 [INFO] 
+📂 Extrayendo datos de: la_serena
+2026-05-11 23:45:21 [INFO]   Leyendo listings: D:\Escritorio\TIDATOS\capa_bronce\chile\la_serena\listing_data.csv
+2026-05-11 23:45:21 [INFO]     → 291 filas leídas, 9 filas omitidas por formato corrupto
+2026-05-11 23:45:21 [WARNING]     ⚠ 9 filas tenían HTML en 'description' que rompió el parseo CSV
+2026-05-11 23:45:21 [INFO]   Leyendo calendar: D:\Escritorio\TIDATOS\capa_bronce\chile\la_serena\past_calendar.csv
+2026-05-11 23:45:21 [INFO]     → 3553 filas leídas
+2026-05-11 23:45:21 [INFO] 
+📂 Extrayendo datos de: pucon
+2026-05-11 23:45:21 [INFO]   Leyendo listings: D:\Escritorio\TIDATOS\capa_bronce\chile\pucon\listing_data.csv
+2026-05-11 23:45:21 [INFO]     → 288 filas leídas, 15 filas omitidas por formato corrupto
+2026-05-11 23:45:21 [WARNING]     ⚠ 15 filas tenían HTML en 'description' que rompió el parseo CSV
+2026-05-11 23:45:21 [INFO]   Leyendo calendar: D:\Escritorio\TIDATOS\capa_bronce\chile\pucon\past_calendar.csv
+2026-05-11 23:45:21 [INFO]     → 3558 filas leídas
+2026-05-11 23:45:21 [INFO] 
+📂 Extrayendo datos de: santiago
+2026-05-11 23:45:21 [INFO]   Leyendo listings: D:\Escritorio\TIDATOS\capa_bronce\chile\santiago\listing_data.csv
+2026-05-11 23:45:21 [INFO]     → 275 filas leídas, 99 filas omitidas por formato corrupto
+2026-05-11 23:45:21 [WARNING]     ⚠ 99 filas tenían HTML en 'description' que rompió el parseo CSV
+2026-05-11 23:45:21 [INFO]   Leyendo calendar: D:\Escritorio\TIDATOS\capa_bronce\chile\santiago\past_calendar.csv
+2026-05-11 23:45:21 [INFO]     → 3555 filas leídas
+2026-05-11 23:45:21 [INFO] 
+📂 Extrayendo datos de: vina_del_mar
+2026-05-11 23:45:21 [INFO]   Leyendo listings: D:\Escritorio\TIDATOS\capa_bronce\chile\vina_del_mar\listing_data.csv
+2026-05-11 23:45:22 [INFO]     → 286 filas leídas, 15 filas omitidas por formato corrupto
+2026-05-11 23:45:22 [WARNING]     ⚠ 15 filas tenían HTML en 'description' que rompió el parseo CSV
+2026-05-11 23:45:22 [INFO]   Leyendo calendar: D:\Escritorio\TIDATOS\capa_bronce\chile\vina_del_mar\past_calendar.csv
+2026-05-11 23:45:22 [INFO]     → 3511 filas leídas
+2026-05-11 23:45:22 [INFO] 
+======================================================================
+2026-05-11 23:45:22 [INFO]   FASE 2: TRANSFORMACIÓN (Limpieza y Estandarización)
+2026-05-11 23:45:22 [INFO] ======================================================================
+2026-05-11 23:45:22 [INFO] 
+🔧 TRANSFORMANDO LISTINGS
+2026-05-11 23:45:22 [INFO]   Total combinado (bruto): 1140 filas
+2026-05-11 23:45:22 [WARNING]   ⚠ 2 filas eliminadas por listing_id no numérico
+2026-05-11 23:45:22 [INFO]   ✏️ 1 host_name NULL → 'Desconocido'
+2026-05-11 23:45:22 [INFO]   ℹ️ bedrooms: 79 NULLs mantenidos (6.9%) — dato no disponible
+2026-05-11 23:45:22 [INFO]   ℹ️ beds: 11 NULLs mantenidos (1.0%) — dato no disponible
+2026-05-11 23:45:22 [INFO]   ℹ️ guests: 76 NULLs mantenidos (6.7%) — dato no disponible
+2026-05-11 23:45:22 [INFO]   ✅ Listings transformados: 1138 filas finales
+2026-05-11 23:45:22 [INFO] 
+🔧 TRANSFORMANDO PAST CALENDAR
+2026-05-11 23:45:22 [INFO]   Total combinado (bruto): 14177 filas
+2026-05-11 23:45:22 [INFO]   ℹ️ booked_rate_avg: 6117 NULLs mantenidos (43.1%) — meses sin reservas
+2026-05-11 23:45:22 [INFO]   ℹ️ booking_lead_time_avg: 6547 NULLs mantenidos (46.2%) — meses sin reservas
+2026-05-11 23:45:22 [INFO]   ℹ️ length_of_stay_avg: 6547 NULLs mantenidos (46.2%) — meses sin reservas
+2026-05-11 23:45:22 [INFO]   ℹ️ min_nights_avg: 125 NULLs mantenidos (0.9%) — meses sin reservas
+2026-05-11 23:45:22 [INFO]   ℹ️ native_booked_rate_avg: 6117 NULLs mantenidos (43.1%) — meses sin reservas
+2026-05-11 23:45:22 [INFO]   ✅ Calendar transformado: 14177 filas finales
+2026-05-11 23:45:22 [INFO] 
+======================================================================
+2026-05-11 23:45:22 [INFO]   FASE 3: CARGA (DataFrames → SQLite)
+2026-05-11 23:45:22 [INFO] ======================================================================
+2026-05-11 23:45:22 [INFO] 
+💾 CARGANDO EN CAPA SILVER (SQLite)
+2026-05-11 23:45:22 [INFO]   Base de datos: D:\Escritorio\TIDATOS\capa_silver\airbnb_silver.db
+2026-05-11 23:45:22 [INFO]   ✅ Tabla 'listings_data' cargada: 1138 registros
+2026-05-11 23:45:23 [INFO]   ✅ Tabla 'past_calendar_rates' cargada: 14177 registros
+2026-05-11 23:45:23 [INFO]   ✅ Índices creados
+2026-05-11 23:45:23 [INFO] 
+======================================================================
+2026-05-11 23:45:23 [INFO]   FASE 4: VALIDACIÓN
+2026-05-11 23:45:23 [INFO] ======================================================================
+2026-05-11 23:45:23 [INFO] 
+🔍 VALIDACIÓN POST-CARGA
+2026-05-11 23:45:23 [INFO] 
+  📊 Conteo de registros:
+2026-05-11 23:45:23 [INFO] 
+  Tabla 'listings_data' — Total: 1138
+2026-05-11 23:45:23 [INFO]     • la_serena: 291 registros
+2026-05-11 23:45:23 [INFO]     • pucon: 288 registros
+2026-05-11 23:45:23 [INFO]     • santiago: 273 registros
+2026-05-11 23:45:23 [INFO]     • vina_del_mar: 286 registros
+2026-05-11 23:45:23 [INFO] 
+  Tabla 'past_calendar_rates' — Total: 14177
+2026-05-11 23:45:23 [INFO]     • la_serena: 3553 registros
+2026-05-11 23:45:23 [INFO]     • pucon: 3558 registros
+2026-05-11 23:45:23 [INFO]     • santiago: 3555 registros
+2026-05-11 23:45:23 [INFO]     • vina_del_mar: 3511 registros
+2026-05-11 23:45:23 [INFO] 
+  🔗 Integridad referencial (listing_id en calendar sin match en listings):
+2026-05-11 23:45:23 [WARNING]     ⚠ la_serena: 9 IDs huérfanos
+2026-05-11 23:45:23 [WARNING]     ⚠ pucon: 12 IDs huérfanos
+2026-05-11 23:45:23 [WARNING]     ⚠ santiago: 27 IDs huérfanos
+2026-05-11 23:45:23 [WARNING]     ⚠ vina_del_mar: 14 IDs huérfanos
+2026-05-11 23:45:23 [INFO]     → Tasa de match: 94.8% (13433/14177)
+2026-05-11 23:45:23 [INFO] 
+  📋 Resumen de NULLs en Silver:
+2026-05-11 23:45:23 [INFO]     listings_data.bedrooms: 79 NULLs (6.9%)
+2026-05-11 23:45:23 [INFO]     listings_data.beds: 11 NULLs (1.0%)
+2026-05-11 23:45:23 [INFO]     listings_data.guests: 76 NULLs (6.7%)
+2026-05-11 23:45:23 [INFO]     listings_data.num_reviews: 5 NULLs (0.4%)
+2026-05-11 23:45:23 [INFO]     listings_data.rating_overall: 32 NULLs (2.8%)
+2026-05-11 23:45:24 [INFO]     past_calendar_rates.booked_rate_avg: 6117 NULLs (43.1%)
+2026-05-11 23:45:24 [INFO]     past_calendar_rates.booking_lead_time_avg: 6547 NULLs (46.2%)
+2026-05-11 23:45:24 [INFO]     past_calendar_rates.length_of_stay_avg: 6547 NULLs (46.2%)
+2026-05-11 23:45:24 [INFO]     past_calendar_rates.min_nights_avg: 125 NULLs (0.9%)
+2026-05-11 23:45:24 [INFO]     past_calendar_rates.native_booked_rate_avg: 6117 NULLs (43.1%)
+2026-05-11 23:45:24 [INFO] 
+======================================================================
+2026-05-11 23:45:24 [INFO]   ✅ ETL COMPLETADO en 2.6 segundos
+2026-05-11 23:45:24 [INFO]   📁 Base de datos Silver: D:\Escritorio\TIDATOS\capa_silver\airbnb_silver.db
+2026-05-11 23:45:24 [INFO]   📄 Log completo: D:\Escritorio\TIDATOS\documentacion\etl_log_20260511_234521.txt
+2026-05-11 23:45:24 [INFO] ======================================================================
