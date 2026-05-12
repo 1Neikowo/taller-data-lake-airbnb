@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Archivos temporales
+*.tmp
+~$*
+
+# Scripts auxiliares (no son parte del proyecto)
+ver_silver.py
+
+# Logs (se regeneran con el ETL)
+documentacion/etl_log_*.txt
+
+# Guion personal (no es entregable)
+documentacion/guion_slides_6_a_9.md
